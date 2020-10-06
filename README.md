@@ -1,15 +1,14 @@
 # WZKY
 Small reverse proxy to help old Windows Servers with limited crypto support communicate securely.
 
-## How To
-Start the reverse proxy.
-```shell
-wzky --host <host>
+## Running as a service on Windows
+Store executable in: `C:\Program Files\wzky\wzky_windows_amd64.exe`
+```cmd
+SC CREATE wzky-httpbin-proxy binPath= "C:\Program Files\wzky\wzky_windows_amd64.exe --host httpbin.org --port 1337" DisplayName= "wzky Httpbin Proxy" start= auto
 ```
-
-Specify host port and bind port.
-```shell
-wzky --host <host> --host-port <port> --port <port>
+Remove the service:
+```cmd
+SC DELETE wzky-httpbin-proxy
 ```
 
 # License
