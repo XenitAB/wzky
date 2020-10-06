@@ -1,5 +1,7 @@
 name: go
-on: push
+on:
+  release:
+    types: [created]
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -13,3 +15,9 @@ jobs:
           GOOS="windows" GOARCH="amd64" go build -o bin/wzky_windows_amd64.exe main.go
           GOOS="linux" GOARCH="amd64" go build -o bin/wzky_linux_amd64 main.go
           GOOS="darwin" GOARCH="amd64" go build -o bin/wzky_darwin_amd64 main.go
+      - name: Upload the artifacts
+        uses: skx/github-action-publish-binaries@master
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          args: "bin/*"
